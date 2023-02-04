@@ -24,7 +24,7 @@ handler.on("EventName", myCallBack)
 # dispatch an event
 handler.dispatchEvent("EventName")
 ```
-With multiple collbacks
+With multiple callbacks
 ```nim
 import eventdispatch
 
