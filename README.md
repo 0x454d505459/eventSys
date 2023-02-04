@@ -24,3 +24,20 @@ handler.on("EventName", myCallBack)
 # dispatch an event
 handler.dispatchEvent("EventName")
 ```
+With multiple collbacks
+```nim
+import eventdispatch
+
+let handler = EventHandler()
+
+proc myCallBack() =
+    echo "Hello world 1"
+
+proc myCallBack2() =
+    echo "Hello world 2"
+
+handler.on("hello event", myCallBack)
+handler.on("hello event", myCallBack2)
+
+handler.dispatchEvent("hello event")
+```
