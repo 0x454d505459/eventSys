@@ -1,12 +1,16 @@
 type 
     EventHandler* = ref object of RootObj
-        calls:seq[proc ()]
+        calls:seq[seq[proc ()]]
         names:seq[string]
 
 
 proc on*(handler:EventHandler, name:string, procedure: proc ()) =
-    handler.calls.add(procedure)
-    handler.names.add(name)
+    let eventIndex = handler.names.find(name)
+    if eventIndex == -1:
+        handler.calls.add(@[procedure])
+        handler.names.add(name)
+    else:
+        handler.calls[eventIndex].add(procedure)
 
 
 proc dispatchEvent*(handler:EventHandler,name:string) =
@@ -14,4 +18,5 @@ proc dispatchEvent*(handler:EventHandler,name:string) =
     if eventIndex == -1:
         raise newException(ValueError, "No such event:" & name)
 
-    handler.calls[eventIndex]()
+    for call in handler.calls[eventIndex]:
+        call()
