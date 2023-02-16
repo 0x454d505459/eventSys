@@ -13,7 +13,7 @@ A small library to dispatch and handle events
 ```nim
 import eventdispatch
 
-proc myCallBack():
+proc myCallBack() =
     echo "Hello world!"
 
 # create an event handler
@@ -41,3 +41,6 @@ handler.on("hello event", myCallBack2)
 
 handler.dispatchEvent("hello event")
 ```
+
+## Todo
+- Find a way to add arguments to callbacks
